@@ -8,7 +8,7 @@ import { GameType } from '../types';
 
 const Choose = () => {
   let history = useHistory();
-  const { state, dispatch } = useContext(Store);
+  const { dispatch } = useContext(Store);
 
   const choose = (gameType: GameType) => {
     setGameType(dispatch, gameType);

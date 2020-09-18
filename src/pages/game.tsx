@@ -1,7 +1,8 @@
 import React, { useContext, useEffect } from 'react';
-import { Button } from '@material-ui/core';
+import { Button, CircularProgress } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 
+import ErrorNotification from '../components/error-notification';
 import { Store } from '../data/store';
 import { GameType } from '../types';
 import { fetchPeople, fetchStarships } from '../data/actions';
@@ -32,6 +33,8 @@ const Game = () => {
 
   console.log(state);
 
+  if (state.loading) return <CircularProgress />;
+
   return (
     <>
       <h1>Game</h1>
@@ -39,6 +42,7 @@ const Game = () => {
         Play again
       </Button>
       <Button onClick={goBack}>Back</Button>
+      <ErrorNotification />
     </>
   );
 };
