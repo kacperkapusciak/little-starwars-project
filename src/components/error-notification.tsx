@@ -2,8 +2,8 @@ import { Snackbar } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
 import React, { useState, useContext, useEffect, SyntheticEvent } from 'react';
 
-import { Store } from '../data/store';
-import { CLEAR_ERROR } from '../types';
+import { Store } from '../store';
+import { clearError } from '../store/actions';
 
 const ErrorNotification = () => {
   const { state, dispatch } = useContext(Store);
@@ -21,7 +21,7 @@ const ErrorNotification = () => {
     }
 
     setOpen(false);
-    dispatch({ type: CLEAR_ERROR });
+    clearError(dispatch);
   };
 
   return (

@@ -2,8 +2,8 @@ import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Button } from '@material-ui/core';
 
-import { Store } from '../data/store';
-import { setGameType } from '../data/actions';
+import { Store } from '../store';
+import { setGameType } from '../store/actions';
 import { GameType } from '../types';
 
 const Choose = () => {

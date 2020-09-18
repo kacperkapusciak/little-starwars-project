@@ -6,6 +6,7 @@ import {
   FETCH_FAIL,
   FETCH_PEOPLE,
   FETCH_STARSHIPS,
+  CLEAR_ERROR,
   SET_GAME_TYPE,
   ActionTypes,
   GameType,
@@ -15,7 +16,7 @@ import {
 
 // The swapi has many holes in IDs, especially for starships. Calling the api by people/:id is
 // a game of luck - you never know if the resource is there. I think that the most reliable way
-// it to fetch all people and keep them in RAM. There aren't that many entities so it should be fine.
+// is to fetch all people and keep them in RAM. There aren't that many entities so it should be fine.
 export const fetchPeople = async (dispatch: Dispatch<ActionTypes>) => {
   dispatch({ type: FETCH_START });
 
@@ -72,6 +73,10 @@ export const fetchStarships = async (dispatch: Dispatch<ActionTypes>) => {
     dispatch({ type: FETCH_FAIL, payload: error.toJSON() });
   }
 };
+
+export const clearError = (dispatch: Dispatch<ActionTypes>) => {
+  dispatch({ type: CLEAR_ERROR });
+}
 
 export const setGameType = (dispatch: Dispatch<ActionTypes>, gameType: GameType) => {
   dispatch({ type: SET_GAME_TYPE, payload: gameType });

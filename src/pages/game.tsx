@@ -3,9 +3,9 @@ import { Button, CircularProgress } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 
 import ErrorNotification from '../components/error-notification';
-import { Store } from '../data/store';
+import { Store } from '../store';
 import { GameType } from '../types';
-import { fetchPeople, fetchStarships } from '../data/actions';
+import { fetchPeople, fetchStarships } from '../store/actions';
 
 const Game = () => {
   const { state, dispatch } = useContext(Store);

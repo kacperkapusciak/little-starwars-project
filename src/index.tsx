@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 
 import App from './app';
 
-import { StoreProvider } from './data/store';
+import { StoreProvider } from './store';
 
 ReactDOM.render(
   <StoreProvider>
