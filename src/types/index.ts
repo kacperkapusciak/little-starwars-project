@@ -7,5 +7,3 @@ export * from './IResponse';
 export * from './IError';
 
 export * from './GameType';
-
-export * from './actions';

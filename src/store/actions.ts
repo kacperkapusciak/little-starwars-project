@@ -1,24 +1,14 @@
 import { Dispatch } from 'react';
 import axios from '../axios-instance';
-import {
-  FETCH_START,
-  FETCH_SUCCESS,
-  FETCH_FAIL,
-  FETCH_PEOPLE,
-  FETCH_STARSHIPS,
-  CLEAR_ERROR,
-  SET_GAME_TYPE,
-  ActionTypes,
-  GameType,
-  IPeopleResponse,
-  IStarshipsResponse,
-} from '../types';
+
+import { actionTypes, ActionTypes } from './actionTypes';
+import { GameType, IPeopleResponse, IStarshipsResponse } from '../types';
 
 // The swapi has many holes in IDs, especially for starships. Calling the api by people/:id is
 // a game of luck - you never know if the resource is there. I think that the most reliable way
 // is to fetch all people and keep them in RAM. There aren't that many entities so it should be fine.
 export const fetchPeople = async (dispatch: Dispatch<ActionTypes>) => {
-  dispatch({ type: FETCH_START });
+  dispatch({ type: actionTypes.FETCH_START });
 
   try {
     // fetch first page to get count and first 10 results
@@ -40,16 +30,16 @@ export const fetchPeople = async (dispatch: Dispatch<ActionTypes>) => {
 
     const payload = [...people, ...restOfPeople];
 
-    dispatch({ type: FETCH_PEOPLE, payload });
-    dispatch({ type: FETCH_SUCCESS });
+    dispatch({ type: actionTypes.FETCH_PEOPLE, payload });
+    dispatch({ type: actionTypes.FETCH_SUCCESS });
   } catch (error) {
-    dispatch({ type: FETCH_FAIL, payload: error.toJSON() });
+    dispatch({ type: actionTypes.FETCH_FAIL, payload: error.toJSON() });
   }
 };
 
 // see comments for fetchPeople
 export const fetchStarships = async (dispatch: Dispatch<ActionTypes>) => {
-  dispatch({ type: FETCH_START });
+  dispatch({ type: actionTypes.FETCH_START });
 
   try {
     const { data } = await axios.get<IStarshipsResponse>('starships/');
@@ -67,17 +57,25 @@ export const fetchStarships = async (dispatch: Dispatch<ActionTypes>) => {
 
     const payload = [...starships, ...restOfStarships];
 
-    dispatch({ type: FETCH_STARSHIPS, payload });
-    dispatch({ type: FETCH_SUCCESS });
+    dispatch({ type: actionTypes.FETCH_STARSHIPS, payload });
+    dispatch({ type: actionTypes.FETCH_SUCCESS });
   } catch (error) {
-    dispatch({ type: FETCH_FAIL, payload: error.toJSON() });
+    dispatch({ type: actionTypes.FETCH_FAIL, payload: error.toJSON() });
   }
 };
 
 export const clearError = (dispatch: Dispatch<ActionTypes>) => {
-  dispatch({ type: CLEAR_ERROR });
-}
+  dispatch({ type: actionTypes.CLEAR_ERROR });
+};
 
 export const setGameType = (dispatch: Dispatch<ActionTypes>, gameType: GameType) => {
-  dispatch({ type: SET_GAME_TYPE, payload: gameType });
+  dispatch({ type: actionTypes.SET_GAME_TYPE, payload: gameType });
+};
+
+export const incrementScoreLeft = (dispatch: Dispatch<ActionTypes>) => {
+  dispatch({ type: actionTypes.INCREMENT_SCORE_LEFT });
+};
+
+export const incrementScoreRight = (dispatch: Dispatch<ActionTypes>) => {
+  dispatch({ type: actionTypes.INCREMENT_SCORE_RIGHT });
 };

@@ -1,5 +1,6 @@
 import { Dispatch } from 'react';
-import { IState, ActionTypes } from '.';
+import { IState } from '.';
+import { ActionTypes } from '../store/actionTypes';
 
 export interface IStore {
   state: IState;
