@@ -1,30 +1,26 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Button } from '@material-ui/core';
 
 import { Store } from '../data/store';
-import { fetchPeopleAndStarshipsCount } from '../data/actions';
+import { setGameType } from '../data/actions';
+import { GameType } from '../types';
 
 const Choose = () => {
   let history = useHistory();
   const { state, dispatch } = useContext(Store);
 
-  useEffect(() => {
-    if (state.count.starships === 0 && state.count.people === 0) {
-      fetchPeopleAndStarshipsCount(dispatch);
-    }
-  });
-
-  const navigateToGame = () => {
+  const choose = (gameType: GameType) => {
+    setGameType(dispatch, gameType);
     history.push('/game');
   };
 
   return (
     <>
-      <Button color="primary" onClick={navigateToGame}>
+      <Button color="primary" onClick={() => choose(GameType.PEOPLE)}>
         Choose people
       </Button>
-      <Button color="primary" onClick={navigateToGame}>
+      <Button color="primary" onClick={() => choose(GameType.STARSHIPS)}>
         Choose starships
       </Button>
     </>

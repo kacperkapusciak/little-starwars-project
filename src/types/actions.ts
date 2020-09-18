@@ -1,25 +1,23 @@
-import { ICount, IStarship, IPerson } from '.';
+import { IStarship, IPerson } from '.';
+import { GameType } from './GameType';
 
-export const FETCH_PEOPLE_AND_STARSHIPS_COUNT = 'FETCH_PEOPLE_AND_STARSHIPS_COUNT';
-export const FETCH_TWO_RANDOM_STARSHIPS = 'FETCH_TWO_RANDOM_STARSHIPS';
-export const FETCH_TWO_RANDOM_PEOPLE = 'FETCH_TWO_RANDOM_PEOPLE';
-
-interface FetchPeopleAndStarshipsCountAction {
-  type: typeof FETCH_PEOPLE_AND_STARSHIPS_COUNT;
-  payload: ICount;
-}
+export const FETCH_STARSHIPS = 'FETCH_STARSHIPS';
+export const FETCH_PEOPLE = 'FETCH_PEOPLE';
+export const SET_GAME_TYPE = 'SET_GAME_TYPE';
 
 interface FetchStarshipsAction {
-  type: typeof FETCH_TWO_RANDOM_STARSHIPS;
-  payload: [IStarship, IStarship];
+  type: typeof FETCH_STARSHIPS;
+  payload: IStarship[];
 }
 
 interface FetchPeopleAction {
-  type: typeof FETCH_TWO_RANDOM_PEOPLE;
-  payload: [IPerson, IPerson];
+  type: typeof FETCH_PEOPLE;
+  payload: IPerson[];
 }
 
-export type ActionTypes =
-  | FetchPeopleAndStarshipsCountAction
-  | FetchStarshipsAction
-  | FetchPeopleAction;
+interface SetGameTypeAction {
+  type: typeof SET_GAME_TYPE;
+  payload: GameType;
+}
+
+export type ActionTypes = FetchStarshipsAction | FetchPeopleAction | SetGameTypeAction;

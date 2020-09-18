@@ -1,12 +1,16 @@
 import React, { createContext, useReducer, ReactNode } from 'react';
 
-import { IState, IStore, ActionTypes, FETCH_PEOPLE_AND_STARSHIPS_COUNT } from '../types';
+import {
+  IState,
+  IStore,
+  ActionTypes,
+  FETCH_PEOPLE,
+  FETCH_STARSHIPS,
+  SET_GAME_TYPE,
+} from '../types';
 
 const initialState: IState = {
-  count: {
-    starships: 0,
-    people: 0,
-  },
+  gameType: null,
   starships: null,
   people: null,
   scoreLeft: 0,
@@ -22,8 +26,12 @@ export const Store = createContext<IStore>(initialStore);
 
 function reducer(state: IState, action: ActionTypes): IState {
   switch (action.type) {
-    case FETCH_PEOPLE_AND_STARSHIPS_COUNT:
-      return { ...state, count: action.payload };
+    case FETCH_PEOPLE:
+      return { ...state, people: action.payload };
+    case FETCH_STARSHIPS:
+      return { ...state, starships: action.payload };
+    case SET_GAME_TYPE:
+      return { ...state, gameType: action.payload };
     default:
       return state;
   }

@@ -1,12 +1,9 @@
-import { IPerson, IStarship } from '.';
+import { IPerson, IStarship, GameType } from '.';
 
 export interface IState {
-  count: {
-    starships: number;
-    people: number;
-  };
-  starships: [IStarship, IStarship] | null;
-  people: [IPerson, IPerson] | null;
+  gameType: GameType | null;
+  starships: IStarship[] | null;
+  people: IPerson[] | null;
   scoreLeft: number;
   scoreRight: number;
 }
