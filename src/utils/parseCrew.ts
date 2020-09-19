@@ -1,4 +1,4 @@
-const parseCrew = (crew: string): number => {
+export const parseCrew = (crew: string): number => {
   const crewWithoutComma = crew.replace(/,/g, '');
 
   const hyphenIndex = crewWithoutComma.indexOf('-');
@@ -8,7 +8,5 @@ const parseCrew = (crew: string): number => {
       ? crewWithoutComma.substring(hyphenIndex + 1, crewWithoutComma.length)
       : crewWithoutComma;
 
-  return parseInt(crewWithoutRange);
+  return parseInt(crewWithoutRange, 10);
 };
-
-export default parseCrew;

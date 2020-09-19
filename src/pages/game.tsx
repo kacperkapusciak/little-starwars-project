@@ -5,31 +5,44 @@ import { useHistory } from 'react-router-dom';
 import ErrorNotification from '../components/error-notification';
 import { Store } from '../store';
 import { GameType } from '../types';
-import { fetchPeople, fetchStarships } from '../store/actions';
+import { fetchPeople, fetchStarships, playGamePeople, playGameStarships } from '../store/actions';
+
+import Score from '../components/score';
 
 const Game = () => {
   const { state, dispatch } = useContext(Store);
+  const { gameType, people, starships } = state;
   let history = useHistory();
 
   useEffect(() => {
-    if (!state.gameType) {
-      goBack();
-    }
+    if (!gameType) goBack();
   });
 
   useEffect(() => {
-    if (state.gameType === GameType.PEOPLE && state.people === null) {
-      fetchPeople(dispatch);
-    } else if (state.gameType === GameType.STARSHIPS && state.starships === null) {
-      fetchStarships(dispatch);
-    }
+    if (gameType === GameType.PEOPLE && !people.length) fetchPeople(dispatch);
+    else if (gameType === GameType.STARSHIPS && !starships.length) fetchStarships(dispatch);
   }, []);
+
+  useEffect(() => {
+    if (
+      (gameType === GameType.PEOPLE && people.length) ||
+      (gameType === GameType.STARSHIPS && starships.length)
+    ) {
+      playGame();
+    }
+  }, [people.length, starships.length]);
 
   const goBack = () => {
     history.push('choose');
   };
 
-  const getTwoRandom = () => {};
+  const playGame = () => {
+    if (gameType === GameType.PEOPLE) {
+      playGamePeople(dispatch, people);
+    } else {
+      playGameStarships(dispatch, starships);
+    }
+  };
 
   console.log(state);
 
@@ -38,7 +51,8 @@ const Game = () => {
   return (
     <>
       <h1>Game</h1>
-      <Button color="primary" onClick={getTwoRandom}>
+      <Score />
+      <Button color="primary" onClick={playGame}>
         Play again
       </Button>
       <Button onClick={goBack}>Back</Button>

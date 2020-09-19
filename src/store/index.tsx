@@ -8,8 +8,11 @@ export const initialState: IState = {
   gameType: null,
   loading: false,
   error: null,
-  starships: null,
-  people: null,
+  starships: [],
+  people: [],
+  gameState: null,
+  gameStarships: null,
+  gamePeople: null,
   score: {
     left: 0,
     right: 0,

@@ -2,7 +2,16 @@ import { Dispatch } from 'react';
 import axios from '../axios-instance';
 
 import { actionTypes, ActionTypes } from './actionTypes';
-import { GameType, IPeopleResponse, IStarshipsResponse, Score } from '../types';
+import {
+  GameState,
+  GameType,
+  IPeopleResponse,
+  IPerson,
+  IStarship,
+  IStarshipsResponse,
+  Score,
+} from '../types';
+import { getTwoRandomInts, comparePeople, compareStarships } from '../utils';
 
 // The swapi has many holes in IDs, especially for starships. Calling the api by people/:id is
 // a game of luck - you never know if the resource is there. I think that the most reliable way
@@ -72,6 +81,36 @@ export const setGameType = (dispatch: Dispatch<ActionTypes>, gameType: GameType)
   dispatch({ type: actionTypes.SET_GAME_TYPE, payload: gameType });
 };
 
-export const incrementScore = (dispatch: Dispatch<ActionTypes>, score: Score) => {
-  dispatch({ type: actionTypes.INCREMENT_SCORE, payload: score });
+export const playGamePeople = (dispatch: Dispatch<ActionTypes>, allPeople: IPerson[]) => {
+  dispatch({ type: actionTypes.START_GAME });
+
+  const randomInts = getTwoRandomInts(allPeople.length);
+  const [left, right] = randomInts.map((num) => allPeople[num]);
+  const gameResult = comparePeople([left, right]);
+
+  dispatch({ type: actionTypes.PLAY_GAME_PEOPLE, payload: [left, right] });
+  dispatch({ type: actionTypes.UPDATE_GAME_STATE, payload: gameResult });
+
+  if (gameResult === GameState.LEFT_WON) {
+    dispatch({ type: actionTypes.INCREMENT_SCORE, payload: Score.LEFT });
+  } else if (gameResult === GameState.RIGHT_WON) {
+    dispatch({ type: actionTypes.INCREMENT_SCORE, payload: Score.RIGHT });
+  }
+};
+
+export const playGameStarships = (dispatch: Dispatch<ActionTypes>, allStarships: IStarship[]) => {
+  dispatch({ type: actionTypes.START_GAME });
+
+  const randomInts = getTwoRandomInts(allStarships.length);
+  const [left, right] = randomInts.map((num) => allStarships[num]);
+  const gameResult = compareStarships([left, right]);
+
+  dispatch({ type: actionTypes.PLAY_GAME_STARSHIPS, payload: [left, right] });
+  dispatch({ type: actionTypes.UPDATE_GAME_STATE, payload: gameResult });
+
+  if (gameResult === GameState.LEFT_WON) {
+    dispatch({ type: actionTypes.INCREMENT_SCORE, payload: Score.LEFT });
+  } else if (gameResult === GameState.RIGHT_WON) {
+    dispatch({ type: actionTypes.INCREMENT_SCORE, payload: Score.RIGHT });
+  }
 };

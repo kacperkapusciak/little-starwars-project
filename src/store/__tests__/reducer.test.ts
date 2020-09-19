@@ -1,9 +1,39 @@
 import reducer from '../reducer';
 import { initialState } from '../';
 import { actionTypes } from '../actionTypes';
-import { GameType, IPerson, IStarship, Score } from '../../types';
+import { GameState, GameType, IPerson, IStarship, Score } from '../../types';
 
 describe('[store] reducer', () => {
+  let person: IPerson, starship: IStarship;
+  beforeEach(() => {
+    person = {
+      name: 'Luke Skywalker',
+      height: '172',
+      mass: '77',
+      hair_color: 'blond',
+      skin_color: 'fair',
+      eye_color: 'blue',
+      birth_year: '19BBY',
+      gender: 'male',
+    };
+
+    starship = {
+      name: 'CR90 corvette',
+      model: 'CR90 corvette',
+      manufacturer: 'Corellian Engineering Corporation',
+      cost_in_credits: '3500000',
+      length: '150',
+      max_atmosphering_speed: '950',
+      crew: '30-165',
+      passengers: '600',
+      cargo_capacity: '3000000',
+      consumables: '1 year',
+      hyperdrive_rating: '2.0',
+      MGLT: '60',
+      starship_class: 'corvette',
+    };
+  });
+
   it('should handle FETCH_START', () => {
     expect(reducer(initialState, { type: actionTypes.FETCH_START })).toEqual({
       ...initialState,
@@ -61,24 +91,6 @@ describe('[store] reducer', () => {
   });
 
   it('should handle FETCH_PEOPLE', () => {
-    const person: IPerson = {
-      name: 'Luke Skywalker',
-      height: '172',
-      mass: '77',
-      hair_color: 'blond',
-      skin_color: 'fair',
-      eye_color: 'blue',
-      birth_year: '19BBY',
-      gender: 'male',
-      homeworld: '',
-      films: [],
-      species: [],
-      vehicles: [],
-      starships: [],
-      created: '',
-      edited: '',
-      url: '',
-    };
     expect(reducer(initialState, { type: actionTypes.FETCH_PEOPLE, payload: [person] })).toEqual({
       ...initialState,
       people: [person],
@@ -86,26 +98,6 @@ describe('[store] reducer', () => {
   });
 
   it('should handle FETCH_STARSHIPS', () => {
-    const starship: IStarship = {
-      name: 'CR90 corvette',
-      model: 'CR90 corvette',
-      manufacturer: 'Corellian Engineering Corporation',
-      cost_in_credits: '3500000',
-      length: '150',
-      max_atmosphering_speed: '950',
-      crew: '30-165',
-      passengers: '600',
-      cargo_capacity: '3000000',
-      consumables: '1 year',
-      hyperdrive_rating: '2.0',
-      MGLT: '60',
-      starship_class: 'corvette',
-      pilots: [],
-      films: [],
-      created: '',
-      edited: '',
-      url: '',
-    };
     expect(
       reducer(initialState, { type: actionTypes.FETCH_STARSHIPS, payload: [starship] })
     ).toEqual({
@@ -162,6 +154,52 @@ describe('[store] reducer', () => {
         left: 0,
         right: 1,
       },
+    });
+  });
+
+  it('should handle START_GAME', () => {
+    expect(reducer(initialState, { type: actionTypes.START_GAME })).toEqual(initialState);
+
+    expect(
+      reducer(
+        {
+          ...initialState,
+          gameState: GameState.INCONCLUSIVE,
+          gamePeople: [person, person],
+          gameStarships: [starship, starship],
+        },
+        { type: actionTypes.START_GAME }
+      )
+    ).toEqual(initialState);
+  });
+
+  it('should handle PLAY_GAME_PEOPLE', () => {
+    expect(
+      reducer(initialState, { type: actionTypes.PLAY_GAME_PEOPLE, payload: [person, person] })
+    ).toEqual({
+      ...initialState,
+      gamePeople: [person, person],
+    });
+  });
+
+  it('should handle PLAY_GAME_STARSHIPS', () => {
+    expect(
+      reducer(initialState, {
+        type: actionTypes.PLAY_GAME_STARSHIPS,
+        payload: [starship, starship],
+      })
+    ).toEqual({
+      ...initialState,
+      gameStarships: [starship, starship],
+    });
+  });
+
+  it('should handle UPDATE_GAME_STATE', () => {
+    expect(
+      reducer(initialState, { type: actionTypes.UPDATE_GAME_STATE, payload: GameState.LEFT_WON })
+    ).toEqual({
+      ...initialState,
+      gameState: GameState.LEFT_WON,
     });
   });
 });

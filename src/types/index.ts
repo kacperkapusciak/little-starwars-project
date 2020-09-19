@@ -7,3 +7,4 @@ export * from './IError';
 
 export * from './GameType';
 export * from './Score';
+export * from './GameState';

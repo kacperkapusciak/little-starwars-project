@@ -1,4 +1,4 @@
-import parseCrew from '../parseCrew';
+import { parseCrew } from '../';
 
 describe('[util] parseCrew', () => {
   it('should parse integers', () => {
