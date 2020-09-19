@@ -4,14 +4,16 @@ import reducer from './reducer';
 
 import { IState, IStore } from '../types';
 
-const initialState: IState = {
+export const initialState: IState = {
   gameType: null,
   loading: false,
   error: null,
   starships: null,
   people: null,
-  scoreLeft: 0,
-  scoreRight: 0,
+  score: {
+    left: 0,
+    right: 0,
+  },
 };
 
 const initialStore: IStore = {

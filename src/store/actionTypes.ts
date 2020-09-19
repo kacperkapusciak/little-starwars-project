@@ -1,4 +1,4 @@
-import { IStarship, IPerson } from '../types';
+import { IStarship, IPerson, Score } from '../types';
 import { GameType } from '../types/GameType';
 import { IError } from '../types/IError';
 
@@ -10,8 +10,7 @@ export enum actionTypes {
   FETCH_PEOPLE = 'FETCH_PEOPLE',
   CLEAR_ERROR = 'CLEAR_ERROR',
   SET_GAME_TYPE = 'SET_GAME_TYPE',
-  INCREMENT_SCORE_LEFT = 'INCREMENT_SCORE_LEFT',
-  INCREMENT_SCORE_RIGHT = 'INCREMENT_SCORE_RIGHT',
+  INCREMENT_SCORE = 'INCREMENT_SCORE',
 }
 
 interface FetchStartAction {
@@ -46,12 +45,9 @@ interface SetGameTypeAction {
   payload: GameType;
 }
 
-interface IncrementScoreLeftAction {
-  type: typeof actionTypes.INCREMENT_SCORE_LEFT;
-}
-
-interface IncrementScoreRightAction {
-  type: typeof actionTypes.INCREMENT_SCORE_RIGHT;
+interface IncrementScoreAction {
+  type: typeof actionTypes.INCREMENT_SCORE;
+  payload: Score;
 }
 
 export type ActionTypes =
@@ -62,5 +58,4 @@ export type ActionTypes =
   | FetchStarshipsAction
   | ClearErrorAction
   | SetGameTypeAction
-  | IncrementScoreLeftAction
-  | IncrementScoreRightAction;
+  | IncrementScoreAction;

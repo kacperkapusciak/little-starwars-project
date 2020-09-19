@@ -2,7 +2,7 @@ import { Dispatch } from 'react';
 import axios from '../axios-instance';
 
 import { actionTypes, ActionTypes } from './actionTypes';
-import { GameType, IPeopleResponse, IStarshipsResponse } from '../types';
+import { GameType, IPeopleResponse, IStarshipsResponse, Score } from '../types';
 
 // The swapi has many holes in IDs, especially for starships. Calling the api by people/:id is
 // a game of luck - you never know if the resource is there. I think that the most reliable way
@@ -72,10 +72,6 @@ export const setGameType = (dispatch: Dispatch<ActionTypes>, gameType: GameType)
   dispatch({ type: actionTypes.SET_GAME_TYPE, payload: gameType });
 };
 
-export const incrementScoreLeft = (dispatch: Dispatch<ActionTypes>) => {
-  dispatch({ type: actionTypes.INCREMENT_SCORE_LEFT });
-};
-
-export const incrementScoreRight = (dispatch: Dispatch<ActionTypes>) => {
-  dispatch({ type: actionTypes.INCREMENT_SCORE_RIGHT });
+export const incrementScore = (dispatch: Dispatch<ActionTypes>, score: Score) => {
+  dispatch({ type: actionTypes.INCREMENT_SCORE, payload: score });
 };

@@ -6,6 +6,8 @@ export interface IState {
   error: IError | null;
   starships: IStarship[] | null;
   people: IPerson[] | null;
-  scoreLeft: number;
-  scoreRight: number;
+  score: {
+    left: number;
+    right: number;
+  }
 }

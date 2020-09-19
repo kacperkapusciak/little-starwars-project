@@ -1,4 +1,4 @@
-import { IState } from '../types';
+import { IState, Score } from '../types';
 import { actionTypes, ActionTypes } from './actionTypes';
 
 function reducer(state: IState, action: ActionTypes): IState {
@@ -24,11 +24,10 @@ function reducer(state: IState, action: ActionTypes): IState {
     case actionTypes.SET_GAME_TYPE:
       return { ...state, gameType: action.payload };
 
-    case actionTypes.INCREMENT_SCORE_LEFT:
-      return { ...state, scoreLeft: state.scoreLeft + 1 };
-    
-    case actionTypes.INCREMENT_SCORE_RIGHT:
-      return { ...state, scoreRight: state.scoreRight + 1 };
+    case actionTypes.INCREMENT_SCORE:
+      const newScore = { ...state.score };
+      action.payload === Score.LEFT ? newScore.left++ : newScore.right++;
+      return { ...state, score: newScore };
 
     default:
       return state;

@@ -1,4 +1,4 @@
-import getTwoRandomInts from './getTwoRandomInts';
+import getTwoRandomInts from '../getTwoRandomInts';
 
 describe('[util] getTwoRandomInts', () => {
   it('should throw error when value passed is below 1', () => {
