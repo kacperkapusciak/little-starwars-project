@@ -1,0 +1,36 @@
+{
+  "files": {
+    "static/js/0.5e18402c.chunk.js": "/little-starwars-project/static/js/0.5e18402c.chunk.js",
+    "static/js/0.5e18402c.chunk.js.map": "/little-starwars-project/static/js/0.5e18402c.chunk.js.map",
+    "static/js/1.ea4d26d1.chunk.js": "/little-starwars-project/static/js/1.ea4d26d1.chunk.js",
+    "static/js/1.ea4d26d1.chunk.js.map": "/little-starwars-project/static/js/1.ea4d26d1.chunk.js.map",
+    "static/js/2.dcffa4a6.chunk.js": "/little-starwars-project/static/js/2.dcffa4a6.chunk.js",
+    "static/js/2.dcffa4a6.chunk.js.map": "/little-starwars-project/static/js/2.dcffa4a6.chunk.js.map",
+    "main.js": "/little-starwars-project/static/js/main.609ec664.chunk.js",
+    "main.js.map": "/little-starwars-project/static/js/main.609ec664.chunk.js.map",
+    "runtime-main.js": "/little-starwars-project/static/js/runtime-main.a89081c1.js",
+    "runtime-main.js.map": "/little-starwars-project/static/js/runtime-main.a89081c1.js.map",
+    "static/js/5.73573cdd.chunk.js": "/little-starwars-project/static/js/5.73573cdd.chunk.js",
+    "static/js/5.73573cdd.chunk.js.map": "/little-starwars-project/static/js/5.73573cdd.chunk.js.map",
+    "static/js/6.cf9d730c.chunk.js": "/little-starwars-project/static/js/6.cf9d730c.chunk.js",
+    "static/js/6.cf9d730c.chunk.js.map": "/little-starwars-project/static/js/6.cf9d730c.chunk.js.map",
+    "static/js/7.3ebdf7fb.chunk.js": "/little-starwars-project/static/js/7.3ebdf7fb.chunk.js",
+    "static/js/7.3ebdf7fb.chunk.js.map": "/little-starwars-project/static/js/7.3ebdf7fb.chunk.js.map",
+    "static/js/8.ffc00ff1.chunk.js": "/little-starwars-project/static/js/8.ffc00ff1.chunk.js",
+    "static/js/8.ffc00ff1.chunk.js.map": "/little-starwars-project/static/js/8.ffc00ff1.chunk.js.map",
+    "static/js/9.bdc13927.chunk.js": "/little-starwars-project/static/js/9.bdc13927.chunk.js",
+    "static/js/9.bdc13927.chunk.js.map": "/little-starwars-project/static/js/9.bdc13927.chunk.js.map",
+    "index.html": "/little-starwars-project/index.html",
+    "precache-manifest.d8b42c0bd985e2cfa17ea845c6422a4d.js": "/little-starwars-project/precache-manifest.d8b42c0bd985e2cfa17ea845c6422a4d.js",
+    "service-worker.js": "/little-starwars-project/service-worker.js",
+    "static/js/5.73573cdd.chunk.js.LICENSE.txt": "/little-starwars-project/static/js/5.73573cdd.chunk.js.LICENSE.txt",
+    "static/media/characters.jpg": "/little-starwars-project/static/media/characters.d707dfb5.jpg",
+    "static/media/logo.png": "/little-starwars-project/static/media/logo.3bd14fbc.png",
+    "static/media/starships.jpg": "/little-starwars-project/static/media/starships.9411e620.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.a89081c1.js",
+    "static/js/5.73573cdd.chunk.js",
+    "static/js/main.609ec664.chunk.js"
+  ]
+}
