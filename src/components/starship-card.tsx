@@ -57,7 +57,7 @@ export const StarshipCard = ({ starship }: StarshipCardProps) => {
         </Typography>
         <Grid container spacing={2}>
           {details.map((detail) => (
-            <Grid item xs sm={detail.grid} key={detail.label}>
+            <Grid item xs={detail.grid} key={detail.label}>
               <Typography variant="overline" display="block">
                 {detail.label}
               </Typography>

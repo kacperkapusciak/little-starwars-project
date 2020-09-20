@@ -44,7 +44,7 @@ export const PersonCard = ({ person }: PersonCardProps) => {
         </Typography>
         <Grid container spacing={2}>
           {details.map((detail) => (
-            <Grid item xs sm={6} key={detail.label}>
+            <Grid item xs={6} key={detail.label}>
               <Typography variant="overline" display="block">
                 {detail.label}
               </Typography>

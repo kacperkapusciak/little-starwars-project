@@ -19,7 +19,7 @@ export const GameResult = () => {
   if (!cards) return null;
 
   return (
-    <Grid container spacing={3} alignItems="center">
+    <Grid container spacing={3} alignItems="center" justify="center">
       <Grid item sm>
         {cards[0]}
       </Grid>
