@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useCallback, useContext, useEffect } from 'react';
 import { Box, Button, Container, Grid, Typography } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 
@@ -16,24 +16,24 @@ const Game = () => {
   const { gameType, people, starships } = state;
   const history = useHistory();
 
+  const playGame = useCallback(() => {
+    if (gameType === GameType.PEOPLE && people.length) {
+      playGamePeople(dispatch, people);
+    } else if (gameType === GameType.STARSHIPS && starships.length) {
+      playGameStarships(dispatch, starships);
+    }
+  }, [dispatch, gameType, people, starships]);
+
   useEffect(() => {
     if (!gameType) goBack();
   });
 
   useEffect(() => {
     playGame();
-  }, [people.length, starships.length]);
+  }, [playGame]);
 
   const goBack = () => {
     history.push('choose');
-  };
-
-  const playGame = () => {
-    if (gameType === GameType.PEOPLE && people.length) {
-      playGamePeople(dispatch, people);
-    } else if (gameType === GameType.STARSHIPS && starships.length) {
-      playGameStarships(dispatch, starships);
-    }
   };
 
   if (state.loading) {

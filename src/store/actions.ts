@@ -2,15 +2,7 @@ import { Dispatch } from 'react';
 import axios from '../axios-instance';
 
 import { actionTypes, ActionTypes } from './actionTypes';
-import {
-  GameState,
-  GameType,
-  IPeopleResponse,
-  IPerson,
-  IStarship,
-  IStarshipsResponse,
-  Score,
-} from '../types';
+import { GameState, GameType, IPerson, IResponse, IStarship, Score } from '../types';
 import { getTwoRandomInts, comparePeople, compareStarships } from '../utils';
 
 // The swapi has many holes in IDs, especially for starships. Calling the api by people/:id is
@@ -21,7 +13,7 @@ export const fetchPeople = async (dispatch: Dispatch<ActionTypes>) => {
 
   try {
     // fetch first page to get count and first 10 results
-    const { data } = await axios.get<IPeopleResponse>('people/');
+    const { data } = await axios.get<IResponse<IPerson[]>>('people/');
     const { count, results: people } = data;
 
     // api provides 10 results per page
@@ -30,7 +22,7 @@ export const fetchPeople = async (dispatch: Dispatch<ActionTypes>) => {
     // ie. [2, 3, 4, 5] when numOfPages is 5
     const helper = Array.from({ length: numOfPages }, (_, i) => i + 1).splice(1, numOfPages);
 
-    const promises = helper.map((num) => axios.get<IPeopleResponse>(`people?page=${num}`));
+    const promises = helper.map((num) => axios.get<IResponse<IPerson[]>>(`people?page=${num}`));
     const responses = await Promise.all(promises);
 
     const restOfPeopleInMatrix = responses.map((response) => response.data.results);
@@ -51,13 +43,15 @@ export const fetchStarships = async (dispatch: Dispatch<ActionTypes>) => {
   dispatch({ type: actionTypes.FETCH_START });
 
   try {
-    const { data } = await axios.get<IStarshipsResponse>('starships/');
+    const { data } = await axios.get<IResponse<IStarship[]>>('starships/');
     const { count, results: starships } = data;
 
     const numOfPages = Math.ceil(count / 10);
 
     const helper = Array.from({ length: numOfPages }, (_, i) => i + 1).splice(1, numOfPages);
-    const promises = helper.map((num) => axios.get<IStarshipsResponse>(`starships?page=${num}`));
+    const promises = helper.map((num) =>
+      axios.get<IResponse<IStarship[]>>(`starships?page=${num}`)
+    );
     const responses = await Promise.all(promises);
 
     const restOfStarshipsInMatrix = responses.map((response) => response.data.results);
@@ -69,7 +63,7 @@ export const fetchStarships = async (dispatch: Dispatch<ActionTypes>) => {
     dispatch({ type: actionTypes.FETCH_STARSHIPS, payload });
     dispatch({ type: actionTypes.FETCH_SUCCESS });
   } catch (error) {
-    dispatch({ type: actionTypes.FETCH_FAIL, payload: error.toJSON() });
+    dispatch({ type: actionTypes.FETCH_FAIL, payload: error && error.toJSON() });
   }
 };
 
@@ -91,10 +85,11 @@ export const playGamePeople = (dispatch: Dispatch<ActionTypes>, allPeople: IPers
   dispatch({ type: actionTypes.PLAY_GAME_PEOPLE, payload: [left, right] });
   dispatch({ type: actionTypes.UPDATE_GAME_STATE, payload: gameResult });
 
-  if (gameResult === GameState.LEFT_WON) {
-    dispatch({ type: actionTypes.INCREMENT_SCORE, payload: Score.LEFT });
-  } else if (gameResult === GameState.RIGHT_WON) {
-    dispatch({ type: actionTypes.INCREMENT_SCORE, payload: Score.RIGHT });
+  if ([GameState.LEFT_WON, GameState.RIGHT_WON].includes(gameResult)) {
+    dispatch({
+      type: actionTypes.INCREMENT_SCORE,
+      payload: gameResult === GameState.LEFT_WON ? Score.LEFT : Score.RIGHT,
+    });
   }
 };
 
@@ -108,9 +103,10 @@ export const playGameStarships = (dispatch: Dispatch<ActionTypes>, allStarships:
   dispatch({ type: actionTypes.PLAY_GAME_STARSHIPS, payload: [left, right] });
   dispatch({ type: actionTypes.UPDATE_GAME_STATE, payload: gameResult });
 
-  if (gameResult === GameState.LEFT_WON) {
-    dispatch({ type: actionTypes.INCREMENT_SCORE, payload: Score.LEFT });
-  } else if (gameResult === GameState.RIGHT_WON) {
-    dispatch({ type: actionTypes.INCREMENT_SCORE, payload: Score.RIGHT });
+  if ([GameState.LEFT_WON, GameState.RIGHT_WON].includes(gameResult)) {
+    dispatch({
+      type: actionTypes.INCREMENT_SCORE,
+      payload: gameResult === GameState.LEFT_WON ? Score.LEFT : Score.RIGHT,
+    });
   }
 };
