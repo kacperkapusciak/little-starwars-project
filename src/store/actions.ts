@@ -34,7 +34,8 @@ export const fetchPeople = async (dispatch: Dispatch<ActionTypes>) => {
     dispatch({ type: actionTypes.FETCH_PEOPLE, payload });
     dispatch({ type: actionTypes.FETCH_SUCCESS });
   } catch (error) {
-    dispatch({ type: actionTypes.FETCH_FAIL, payload: error && error.toJSON() });
+    const formatError = (error.toJSON && error.toJSON()) || error;
+    dispatch({ type: actionTypes.FETCH_FAIL, payload: formatError });
   }
 };
 
@@ -63,7 +64,8 @@ export const fetchStarships = async (dispatch: Dispatch<ActionTypes>) => {
     dispatch({ type: actionTypes.FETCH_STARSHIPS, payload });
     dispatch({ type: actionTypes.FETCH_SUCCESS });
   } catch (error) {
-    dispatch({ type: actionTypes.FETCH_FAIL, payload: error && error.toJSON() });
+    const formatError = (error.toJSON && error.toJSON()) || error;
+    dispatch({ type: actionTypes.FETCH_FAIL, payload: formatError });
   }
 };
 
@@ -78,7 +80,7 @@ export const setGameType = (dispatch: Dispatch<ActionTypes>, gameType: GameType)
 export const playGamePeople = (dispatch: Dispatch<ActionTypes>, allPeople: IPerson[]) => {
   dispatch({ type: actionTypes.START_GAME });
 
-  const randomInts = getTwoRandomInts(allPeople.length);
+  const randomInts = getTwoRandomInts(allPeople.length - 1);
   const [left, right] = randomInts.map((num) => allPeople[num]);
   const gameResult = comparePeople([left, right]);
 
@@ -96,7 +98,7 @@ export const playGamePeople = (dispatch: Dispatch<ActionTypes>, allPeople: IPers
 export const playGameStarships = (dispatch: Dispatch<ActionTypes>, allStarships: IStarship[]) => {
   dispatch({ type: actionTypes.START_GAME });
 
-  const randomInts = getTwoRandomInts(allStarships.length);
+  const randomInts = getTwoRandomInts(allStarships.length - 1);
   const [left, right] = randomInts.map((num) => allStarships[num]);
   const gameResult = compareStarships([left, right]);
 
