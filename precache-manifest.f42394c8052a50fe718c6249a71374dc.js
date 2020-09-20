@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "3e534a295da2cce698cd6cd8746db486",
+    "revision": "8488d06c16e76560ab226a78bc63724e",
     "url": "/little-starwars-project/index.html"
   },
   {
@@ -28,8 +28,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/little-starwars-project/static/js/6.cf152743.chunk.js"
   },
   {
-    "revision": "475ee322d6ce4033775b",
-    "url": "/little-starwars-project/static/js/main.0f9bca61.chunk.js"
+    "revision": "541d7dbd79c03c5f1d8d",
+    "url": "/little-starwars-project/static/js/main.a9a26430.chunk.js"
   },
   {
     "revision": "20d6e4316ce848e7db4f",
