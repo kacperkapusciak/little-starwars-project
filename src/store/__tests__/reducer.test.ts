@@ -202,4 +202,19 @@ describe('[store] reducer', () => {
       gameState: GameState.LEFT_WON,
     });
   });
+
+  it('should handle RESET_SCORE', () => {
+    expect(
+      reducer(
+        {
+          ...initialState,
+          score: {
+            left: 1,
+            right: 1,
+          },
+        },
+        { type: actionTypes.RESET_SCORE, payload: Score.LEFT }
+      )
+    ).toEqual(initialState);
+  });
 });

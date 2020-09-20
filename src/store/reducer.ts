@@ -41,6 +41,9 @@ function reducer(state: IState, action: ActionTypes): IState {
       action.payload === Score.LEFT ? newScore.left++ : newScore.right++;
       return { ...state, score: newScore };
 
+    case actionTypes.RESET_SCORE:
+      return { ...state, score: { left: 0, right: 0 } };
+
     default:
       return state;
   }

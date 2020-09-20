@@ -110,3 +110,7 @@ export const playGameStarships = (dispatch: Dispatch<ActionTypes>, allStarships:
     });
   }
 };
+
+export const resetScore = (dispatch: Dispatch<ActionTypes>) => {
+  dispatch({ type: actionTypes.RESET_SCORE });
+};

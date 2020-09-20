@@ -13,6 +13,7 @@ export enum actionTypes {
   PLAY_GAME_PEOPLE = 'PLAY_GAME_PEOPLE',
   UPDATE_GAME_STATE = 'UPDATE_GAME_STATE',
   INCREMENT_SCORE = 'INCREMENT_SCORE',
+  RESET_SCORE = 'RESET_SCORE',
 }
 
 interface FetchStartAction {
@@ -71,6 +72,10 @@ interface IncrementScoreAction {
   payload: Score;
 }
 
+interface ResetScoreAction {
+  type: typeof actionTypes.RESET_SCORE;
+}
+
 export type ActionTypes =
   | FetchStartAction
   | FetchSuccessAction
@@ -83,4 +88,5 @@ export type ActionTypes =
   | PlayGameStarshipsAction
   | PlayGamePeopleAction
   | UpdateGameStateAction
-  | IncrementScoreAction;
+  | IncrementScoreAction
+  | ResetScoreAction;

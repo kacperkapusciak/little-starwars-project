@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 import { Store } from '../store';
 import { GameType } from '../types';
 import { ErrorNotification, GameResult, Versus, Spinner } from '../components';
-import { playGamePeople, playGameStarships } from '../store/actions';
+import { playGamePeople, playGameStarships, resetScore } from '../store/actions';
 
 const Game = () => {
   const { state, dispatch } = useContext(Store);
@@ -29,6 +29,7 @@ const Game = () => {
   }, [playGame]);
 
   const goBack = () => {
+    resetScore(dispatch);
     history.push('choose');
   };
 
