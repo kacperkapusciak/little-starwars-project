@@ -1,23 +1,21 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Typography, useTheme } from '@material-ui/core';
 
-import { Store } from '../store';
-import { GameType } from '../types';
+import { IPerson, IStarship } from '../types';
 
-export const Versus = () => {
+interface VersusProps {
+  participants: [IPerson, IPerson] | [IStarship, IStarship] | null;
+}
+
+export const Versus = ({ participants }: VersusProps) => {
   const theme = useTheme();
-  const { state } = useContext(Store);
-  const { gameType, gamePeople, gameStarships } = state;
-
-  const participants = gameType === GameType.PEOPLE ? gamePeople : gameStarships;
   const vs = <span style={{ color: theme.palette.secondary.main }}>vs</span>;
 
-  const left = participants && participants[0].name;
-  const right = participants && participants[1].name;
+  if (!participants) return null;
 
   return (
     <Typography variant="h5" color="textSecondary" align="center" style={{ marginBottom: 48 }}>
-      {left} {vs} {right}
+      {participants[0].name} {vs} {participants[1].name}
     </Typography>
   );
 };

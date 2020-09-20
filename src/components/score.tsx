@@ -1,19 +1,23 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Typography } from '@material-ui/core';
 
-import { Store } from '../store';
+import { GameState } from '../types';
 
-export const Score = () => {
-  const { state } = useContext(Store);
-  const { score, gameState } = state;
-  return (
-    <>
-      <Typography variant="h2" align="center">
-        {score.left} - {score.right}
-      </Typography>
-      <Typography variant="h5" align="center" color="textSecondary">
-        {gameState?.replace(/_/g, ' ')}
-      </Typography>
-    </>
-  );
-};
+interface ScoreProps {
+  score: {
+    left: number;
+    right: number;
+  };
+  gameState: GameState | null;
+}
+
+export const Score = ({ score, gameState }: ScoreProps) => (
+  <>
+    <Typography variant="h2" align="center">
+      {score.left} - {score.right}
+    </Typography>
+    <Typography variant="h5" align="center" color="textSecondary">
+      {gameState?.replace(/_/g, ' ')}
+    </Typography>
+  </>
+);

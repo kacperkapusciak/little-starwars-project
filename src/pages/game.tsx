@@ -9,7 +9,7 @@ import { playGamePeople, playGameStarships, resetScore } from '../store/actions'
 
 const Game = () => {
   const { state, dispatch } = useContext(Store);
-  const { gameType, people, starships } = state;
+  const { gameType, people, starships, gamePeople, gameStarships } = state;
   const history = useHistory();
 
   const playGame = useCallback(() => {
@@ -45,7 +45,7 @@ const Game = () => {
             <Typography variant="h3" gutterBottom align="center">
               {gameType === GameType.PEOPLE ? 'Characters' : 'Starships'}
             </Typography>
-            <Versus />
+            <Versus participants={gameType === GameType.PEOPLE ? gamePeople : gameStarships} />
             <GameResult />
             <Box display="flex" justifyContent="center" style={{ margin: '32px 0' }}>
               <Button variant="contained" color="primary" size="large" onClick={playGame}>

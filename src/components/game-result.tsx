@@ -7,7 +7,7 @@ import { GameType } from '../types';
 
 export const GameResult = () => {
   const { state } = useContext(Store);
-  const { gameType, gamePeople, gameStarships } = state;
+  const { gameState, gameType, gamePeople, gameStarships, score } = state;
 
   let cards: JSX.Element[] | null = null;
   if (gameType === GameType.PEOPLE && gamePeople) {
@@ -24,7 +24,7 @@ export const GameResult = () => {
         {cards[0]}
       </Grid>
       <Grid item sm={3}>
-        <Score />
+        <Score score={score} gameState={gameState} />
       </Grid>
       <Grid item sm>
         {cards[1]}
