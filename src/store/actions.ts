@@ -22,7 +22,7 @@ export const fetchPeople = async (dispatch: Dispatch<ActionTypes>) => {
     // ie. [2, 3, 4, 5] when numOfPages is 5
     const helper = Array.from({ length: numOfPages }, (_, i) => i + 1).splice(1, numOfPages);
 
-    const promises = helper.map((num) => axios.get<IResponse<IPerson[]>>(`people?page=${num}`));
+    const promises = helper.map((num) => axios.get<IResponse<IPerson[]>>(`people/?page=${num}`));
     const responses = await Promise.all(promises);
 
     const restOfPeopleInMatrix = responses.map((response) => response.data.results);
@@ -50,7 +50,7 @@ export const fetchStarships = async (dispatch: Dispatch<ActionTypes>) => {
 
     const helper = Array.from({ length: numOfPages }, (_, i) => i + 1).splice(1, numOfPages);
     const promises = helper.map((num) =>
-      axios.get<IResponse<IStarship[]>>(`starships?page=${num}`)
+      axios.get<IResponse<IStarship[]>>(`starships/?page=${num}`)
     );
     const responses = await Promise.all(promises);
 
