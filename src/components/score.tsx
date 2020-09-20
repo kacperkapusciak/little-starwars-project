@@ -3,7 +3,7 @@ import { Typography } from '@material-ui/core';
 
 import { Store } from '../store';
 
-const Score = () => {
+export const Score = () => {
   const { state } = useContext(Store);
   const { score, gameState } = state;
   return (
@@ -17,5 +17,3 @@ const Score = () => {
     </>
   );
 };
-
-export default Score;

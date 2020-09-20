@@ -2,14 +2,10 @@ import React, { useCallback, useContext, useEffect } from 'react';
 import { Box, Button, Container, Grid, Typography } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 
-import ErrorNotification from '../components/error-notification';
 import { Store } from '../store';
 import { GameType } from '../types';
+import { ErrorNotification, GameResult, Versus, Spinner } from '../components';
 import { playGamePeople, playGameStarships } from '../store/actions';
-
-import GameResult from '../components/game-result';
-import Versus from '../components/versus';
-import Spinner from '../components/spinner';
 
 const Game = () => {
   const { state, dispatch } = useContext(Store);

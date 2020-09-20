@@ -6,7 +6,7 @@ interface PersonCardProps {
   person: IPerson | null;
 }
 
-const PersonCard = ({ person }: PersonCardProps) => {
+export const PersonCard = ({ person }: PersonCardProps) => {
   if (!person) return null;
 
   const details = [
@@ -62,5 +62,3 @@ const PersonCard = ({ person }: PersonCardProps) => {
     </Card>
   );
 };
-
-export default PersonCard;

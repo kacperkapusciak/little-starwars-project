@@ -4,7 +4,7 @@ import { Typography, useTheme } from '@material-ui/core';
 import { Store } from '../store';
 import { GameType } from '../types';
 
-const Versus = () => {
+export const Versus = () => {
   const theme = useTheme();
   const { state } = useContext(Store);
   const { gameType, gamePeople, gameStarships } = state;
@@ -21,5 +21,3 @@ const Versus = () => {
     </Typography>
   );
 };
-
-export default Versus;

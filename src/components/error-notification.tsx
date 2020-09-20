@@ -5,7 +5,7 @@ import React, { useState, useContext, useEffect, SyntheticEvent } from 'react';
 import { Store } from '../store';
 import { clearError } from '../store/actions';
 
-const ErrorNotification = () => {
+export const ErrorNotification = () => {
   const { state, dispatch } = useContext(Store);
   const [open, setOpen] = useState(false);
 
@@ -37,5 +37,3 @@ const ErrorNotification = () => {
     </Snackbar>
   );
 };
-
-export default ErrorNotification;

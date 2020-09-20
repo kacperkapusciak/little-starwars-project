@@ -6,7 +6,7 @@ interface StarshipCardProps {
   starship: IStarship | null;
 }
 
-const StarshipCard = ({ starship }: StarshipCardProps) => {
+export const StarshipCard = ({ starship }: StarshipCardProps) => {
   if (!starship) return null;
 
   const details: {
@@ -75,5 +75,3 @@ const StarshipCard = ({ starship }: StarshipCardProps) => {
     </Card>
   );
 };
-
-export default StarshipCard;

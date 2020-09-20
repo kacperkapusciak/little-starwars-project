@@ -1,13 +1,11 @@
 import React, { useContext } from 'react';
 import { Grid } from '@material-ui/core';
 
+import { PersonCard, StarshipCard, Score } from '.';
 import { Store } from '../store';
-import PersonCard from './person-card';
-import StarshipCard from './starship-card';
-import Score from './score';
 import { GameType } from '../types';
 
-const GameResult = () => {
+export const GameResult = () => {
   const { state } = useContext(Store);
   const { gameType, gamePeople, gameStarships } = state;
 
@@ -34,5 +32,3 @@ const GameResult = () => {
     </Grid>
   );
 };
-
-export default GameResult;
