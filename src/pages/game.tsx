@@ -1,35 +1,27 @@
 import React, { useContext, useEffect } from 'react';
-import { Button, CircularProgress } from '@material-ui/core';
+import { Box, Button, Container, Grid, Typography } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 
 import ErrorNotification from '../components/error-notification';
 import { Store } from '../store';
 import { GameType } from '../types';
-import { fetchPeople, fetchStarships, playGamePeople, playGameStarships } from '../store/actions';
+import { playGamePeople, playGameStarships } from '../store/actions';
 
-import Score from '../components/score';
+import GameResult from '../components/game-result';
+import Versus from '../components/versus';
+import Spinner from '../components/spinner';
 
 const Game = () => {
   const { state, dispatch } = useContext(Store);
   const { gameType, people, starships } = state;
-  let history = useHistory();
+  const history = useHistory();
 
   useEffect(() => {
     if (!gameType) goBack();
   });
 
   useEffect(() => {
-    if (gameType === GameType.PEOPLE && !people.length) fetchPeople(dispatch);
-    else if (gameType === GameType.STARSHIPS && !starships.length) fetchStarships(dispatch);
-  }, []);
-
-  useEffect(() => {
-    if (
-      (gameType === GameType.PEOPLE && people.length) ||
-      (gameType === GameType.STARSHIPS && starships.length)
-    ) {
-      playGame();
-    }
+    playGame();
   }, [people.length, starships.length]);
 
   const goBack = () => {
@@ -37,27 +29,41 @@ const Game = () => {
   };
 
   const playGame = () => {
-    if (gameType === GameType.PEOPLE) {
+    if (gameType === GameType.PEOPLE && people.length) {
       playGamePeople(dispatch, people);
-    } else {
+    } else if (gameType === GameType.STARSHIPS && starships.length) {
       playGameStarships(dispatch, starships);
     }
   };
 
-  console.log(state);
-
-  if (state.loading) return <CircularProgress />;
+  if (state.loading) {
+    return <Spinner />;
+  }
 
   return (
-    <>
-      <h1>Game</h1>
-      <Score />
-      <Button color="primary" onClick={playGame}>
-        Play again
-      </Button>
-      <Button onClick={goBack}>Back</Button>
+    <Container maxWidth="md">
+      <Grid container spacing={0} direction="column" alignItems="center" style={{ marginTop: 128 }}>
+        <Grid item>
+          <Box>
+            <Typography variant="h3" gutterBottom align="center">
+              {gameType === GameType.PEOPLE ? 'Characters' : 'Starships'}
+            </Typography>
+            <Versus />
+            <GameResult />
+            <Box display="flex" justifyContent="center" style={{ margin: '32px 0' }}>
+              <Button variant="contained" color="primary" size="large" onClick={playGame}>
+                play again
+              </Button>
+            </Box>
+            <Button variant="outlined" onClick={goBack}>
+              go back
+            </Button>
+          </Box>
+        </Grid>
+      </Grid>
+
       <ErrorNotification />
-    </>
+    </Container>
   );
 };
 

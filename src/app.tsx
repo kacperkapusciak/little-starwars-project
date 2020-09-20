@@ -1,14 +1,18 @@
 import React, { Suspense } from 'react';
 import { HashRouter as Router, Switch, Route } from 'react-router-dom';
-import { CircularProgress } from '@material-ui/core';
+import { ThemeProvider, CssBaseline } from '@material-ui/core';
+import theme from './styles/theme';
+
+import Spinner from './components/spinner';
 
 const Choose = React.lazy(() => import('./pages/choose'));
 const Game = React.lazy(() => import('./pages/game'));
 const Landing = React.lazy(() => import('./pages/landing'));
 
-const App = () => {
-  return (
-    <Suspense fallback={<CircularProgress />}>
+const App = () => (
+  <ThemeProvider theme={theme}>
+    <CssBaseline />
+    <Suspense fallback={<Spinner />}>
       <Router>
         <Switch>
           <Route path="/game">
@@ -23,7 +27,7 @@ const App = () => {
         </Switch>
       </Router>
     </Suspense>
-  );
-};
+  </ThemeProvider>
+);
 
 export default App;

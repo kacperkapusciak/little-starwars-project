@@ -4,7 +4,6 @@
 
 - React
 - Typescript
-- styled-components
 - react-router
 - Material-UI
 

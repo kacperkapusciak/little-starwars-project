@@ -42,7 +42,7 @@ export const fetchPeople = async (dispatch: Dispatch<ActionTypes>) => {
     dispatch({ type: actionTypes.FETCH_PEOPLE, payload });
     dispatch({ type: actionTypes.FETCH_SUCCESS });
   } catch (error) {
-    dispatch({ type: actionTypes.FETCH_FAIL, payload: error.toJSON() });
+    dispatch({ type: actionTypes.FETCH_FAIL, payload: error && error.toJSON() });
   }
 };
 

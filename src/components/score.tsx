@@ -1,13 +1,20 @@
 import React, { useContext } from 'react';
+import { Typography } from '@material-ui/core';
+
 import { Store } from '../store';
 
 const Score = () => {
   const { state } = useContext(Store);
-  const { score } = state;
+  const { score, gameState } = state;
   return (
-    <div>
-      {score.left} - {score.right}
-    </div>
+    <>
+      <Typography variant="h2" align="center">
+        {score.left} - {score.right}
+      </Typography>
+      <Typography variant="h5" align="center" color="textSecondary">
+        {gameState?.replace(/_/g, ' ')}
+      </Typography>
+    </>
   );
 };
 
